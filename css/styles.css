@@ -513,6 +513,12 @@ footer p {
    margin: 0;
 }
 
+#visit-timer {
+   margin-top: 5px;
+   font-size: 0.9rem;
+   opacity: 0.8;
+}
+
 /* =========================
 Dark Mode
 ========================= */

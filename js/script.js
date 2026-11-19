@@ -128,3 +128,28 @@ newQuoteBtn.addEventListener("click", loadQuote);
 
 // Load the first quote when the page opens
 loadQuote();
+
+// Visit timer: shows how long the visitor has been on the site
+const visitTimer = document.getElementById("visit-timer");
+let secondsOnSite = 0;
+
+function formatTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    // Use singular or plural words depending on the number
+    const secondWord = seconds === 1 ? "second" : "seconds";
+    const minuteWord = minutes === 1 ? "minute" : "minutes";
+
+    if (minutes === 0) {
+        return `${seconds} ${secondWord}`;
+    }
+
+    return `${minutes} ${minuteWord} and ${seconds} ${secondWord}`;
+}
+
+// Update the timer every second
+setInterval(function () {
+    secondsOnSite++;
+    visitTimer.textContent = `You've been here for ${formatTime(secondsOnSite)}`;
+}, 1000);
