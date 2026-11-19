@@ -82,6 +82,24 @@ nav {
    color: #6c63a8;
 }
 
+/* Dark mode toggle button */
+.theme-toggle {
+   width: 40px;
+   height: 40px;
+
+   border: 2px solid var(--purple);
+   border-radius: 50%;
+   background-color: transparent;
+
+   font-size: 1.1rem;
+   cursor: pointer;
+   transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+   transform: scale(1.1);
+}
+
 /* =========================
 Home / Hero Section
 ========================= */
@@ -436,6 +454,55 @@ footer p {
    margin: 0;
 }
 
+/* =========================
+Dark Mode
+========================= */
+
+/* Dark mode colors (applied when body has the dark-mode class) */
+body.dark-mode {
+   --background: #1f1b24;
+
+   --pink: #4a3540;
+   --turquoise: #2f4645;
+   --yellow: #4a4330;
+   --purple: #3b3550;
+
+   --primary-dark: #c9bff0;
+
+   --text: #f1edf5;
+   --soft-text: #c8c1cf;
+}
+
+/* Elements that use fixed colors instead of variables */
+body.dark-mode header,
+body.dark-mode #projects,
+body.dark-mode #contact-form {
+   background-color: #2a2530;
+}
+
+body.dark-mode .logo,
+body.dark-mode .nav-links a {
+   color: var(--text);
+}
+
+body.dark-mode .nav-links a:hover {
+   color: var(--primary-dark);
+}
+
+/* Keep button text readable on hover */
+body.dark-mode .hero a:hover,
+body.dark-mode #contact-form button:hover {
+   background-color: #7a6db0;
+}
+
+/* Brighter feedback colors for dark background */
+body.dark-mode #form-message.error-message {
+   color: #ff8a80;
+}
+
+body.dark-mode #form-message.success-message {
+   color: #81c784;
+}
 
 /* =========================
 Responsive Design
