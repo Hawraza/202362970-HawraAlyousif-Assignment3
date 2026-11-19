@@ -66,3 +66,42 @@ themeToggle.addEventListener("click", function () {
         themeToggle.textContent = "🌙";
     }
 });
+
+// Quote section: fetch a random quote from an external API
+const quoteText = document.getElementById("quote-text");
+const quoteAuthor = document.getElementById("quote-author");
+const newQuoteBtn = document.getElementById("new-quote-btn");
+
+async function loadQuote() {
+    // Show a loading state while waiting for the API
+    quoteText.textContent = "Loading quote...";
+    quoteText.classList.remove("quote-error");
+    quoteAuthor.textContent = "";
+    newQuoteBtn.disabled = true;
+
+    try {
+        const response = await fetch("https://dummyjson.com/quotes/random");
+
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        quoteText.textContent = `“${data.quote}”`;
+        quoteAuthor.textContent = `— ${data.author}`;
+    } catch (error) {
+        // Show a user-friendly message if the API fails
+        quoteText.textContent = "Sorry, we couldn't load a quote right now. Please try again later.";
+        quoteText.classList.add("quote-error");
+        console.error(error);
+    } finally {
+        // Enable the button again whether the request succeeded or failed
+        newQuoteBtn.disabled = false;
+    }
+}
+
+newQuoteBtn.addEventListener("click", loadQuote);
+
+// Load the first quote when the page opens
+loadQuote();

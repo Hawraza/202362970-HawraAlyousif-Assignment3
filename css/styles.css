@@ -188,6 +188,65 @@ About Me Section
 }
 
 /* =========================
+Quote Section (API)
+========================= */
+
+#quote {
+   background-color: var(--background);
+   text-align: center;
+}
+
+.quote-card {
+   max-width: 700px;
+   margin: 0 auto;
+   padding: 30px;
+
+   background-color: var(--purple);
+   border-radius: 20px;
+}
+
+#quote-text {
+   margin-bottom: 15px;
+   font-size: 1.2rem;
+   font-style: italic;
+}
+
+#quote-author {
+   margin-bottom: 20px;
+   color: var(--primary-dark);
+   font-weight: bold;
+}
+
+/* Message shown when the API request fails */
+#quote-text.quote-error {
+   color: #b00020;
+   font-style: normal;
+}
+
+.quote-btn {
+   padding: 10px 20px;
+
+   border: none;
+   border-radius: 20px;
+   background-color: var(--primary);
+   color: var(--white);
+
+   font-weight: bold;
+   cursor: pointer;
+   transition: transform 0.2s ease;
+}
+
+.quote-btn:hover {
+   transform: scale(1.05);
+}
+
+/* Disabled while a new quote is loading */
+.quote-btn:disabled {
+   opacity: 0.6;
+   cursor: not-allowed;
+}
+
+/* =========================
 Projects Section
 ========================= */
 
@@ -502,6 +561,10 @@ body.dark-mode #form-message.error-message {
 
 body.dark-mode #form-message.success-message {
    color: #81c784;
+}
+
+body.dark-mode #quote-text.quote-error {
+   color: #ff8a80;
 }
 
 /* =========================
