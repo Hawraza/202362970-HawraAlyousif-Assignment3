@@ -1,6 +1,17 @@
-// Contact form interaction
+// Contact form interaction with multi-step validation
 const contactForm = document.getElementById("contact-form");
 const formMessage = document.getElementById("form-message");
+
+// Validation rules
+const namePattern = /^[A-Za-z\u0600-\u06FF\s]{2,}$/; // letters (English or Arabic) and spaces, at least 2
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // text@text.text with no spaces
+const minMessageLength = 10;
+
+// Display a feedback message under the form
+function showFormMessage(text, type) {
+    formMessage.textContent = text;
+    formMessage.className = type;
+}
 
 contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -9,20 +20,32 @@ contactForm.addEventListener("submit", function (event) {
     const email = document.getElementById("email").value.trim();
     const message = document.getElementById("message").value.trim();
 
+    // Step 1: make sure no field is empty
     if (name === "" || email === "" || message === "") {
-        formMessage.textContent = "Please fill in all fields.";
-        formMessage.className = "error-message";
+        showFormMessage("Please fill in all fields.", "error-message");
         return;
     }
 
-    if (!email.includes("@") || !email.includes(".")) {
-        formMessage.textContent = "Please enter a valid email address.";
-        formMessage.className = "error-message";
+    // Step 2: check the name format
+    if (!namePattern.test(name)) {
+        showFormMessage("Name should contain letters only (at least 2 characters).", "error-message");
         return;
     }
 
-    formMessage.textContent = "Thank you! Your message has been received.";
-    formMessage.className = "success-message";
+    // Step 3: check the email format
+    if (!emailPattern.test(email)) {
+        showFormMessage("Please enter a valid email address (example: name@example.com).", "error-message");
+        return;
+    }
+
+    // Step 4: check the message length
+    if (message.length < minMessageLength) {
+        showFormMessage(`Your message is too short. Please write at least ${minMessageLength} characters.`, "error-message");
+        return;
+    }
+
+    // All checks passed: allow submission
+    showFormMessage(`Thank you, ${name}! Your message has been received.`, "success-message");
     contactForm.reset();
 });
 
